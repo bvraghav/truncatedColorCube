@@ -1,4 +1,14 @@
-# bunny-walkthrough
+# Truncated Color Cube
+built over https://github.com/stackgl/bunny-walkthrough
+
+This repository creates a truncated cube with [this
+gist](https://gist.github.com/bvraghav/b897c168a67d08ad8f581009531afad2).
+
+
+And thus visualisation is a representation of the RGB
+color space.
+
+## The description from bunny-walkthrough
 
 A "hello world" example of sorts for using [stack.gl](http://stack.gl/):
 simply draws a 3D bunny to the screen with an orbit camera for interacting
@@ -25,3 +35,4 @@ npm start
 * [canvas-orbit-camera](http://github.com/hughsk/canvas-orbit-camera)
 * [simplicial-complex](http://github.com/mikolalysenko/simplicial-complex)
 * [gl-matrix](http://github.com/toji/gl-matrix)
+* [openjscad](https://openjscad.xyz/)
