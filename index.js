@@ -52,6 +52,11 @@ var view       = mat4.create()
 var height
 var width
 
+// Ad-hoc scale correction for visibility at start
+// mat4.identity(model) // redundant since newly created!
+mat4.scale(model, model, [12,12,12])
+mat4.translate(model, model, [-0.5, -0.5, -0.5])
+
 // Pulls up our shader code and returns an instance
 // of gl-shader. Using the glslify browserify transform,
 // these will be passed through glslify first to pull in
