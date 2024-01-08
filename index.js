@@ -4,11 +4,13 @@ var glShader = require('gl-shader')
 var mat4     = require('gl-mat4')
 var normals  = require('normals')
 var glslify  = require('glslify')
-var bunny    = require('bunny')
+var modTcc   = require('./tcc/truncatedCube.js')
+var asTriads = require('./tcc/asTriads.js')
 
 // Creates a canvas element and attaches
 // it to the <body> on your DOM.
-var canvas = document.body.appendChild(document.createElement('canvas'))
+// var canvas = document.body.appendChild(document.createElement('canvas'))
+var canvas = document.querySelector('#canvas')
 
 // Creates an instance of canvas-orbit-camera,
 // which later will generate a view matrix and
@@ -38,13 +40,8 @@ window.addEventListener('resize'
 // as arrays for simplicity and interoperability.
 var geometry = Geometry(gl)
 
-geometry.attr('aPosition', bunny.positions)
-geometry.attr('aNormal', normals.vertexNormals(
-    bunny.cells
-  , bunny.positions
-))
-
-geometry.faces(bunny.cells)
+// geometry.attr('aPosition', tcc.vertices)
+// geometry.faces(tcc.faces)
 
 // Create the base matrices to be used
 // when rendering the bunny. Alternatively, can
@@ -64,8 +61,8 @@ var width
 // savings by doing this in Node rather then at runtime in
 // the browser.
 var shader = glShader(gl,
-    glslify('./shaders/bunny.vert')
-  , glslify('./shaders/bunny.frag')
+    glslify('./shaders/tcc.vert')
+  , glslify('./shaders/tcc.frag')
 )
 
 // The logic/update loop, which updates all of the variables
@@ -91,6 +88,7 @@ function update() {
   var fieldOfView = Math.PI / 4
   var near = 0.01
   var far  = 100
+  var tcc = getTcc()
 
   mat4.perspective(projection
     , fieldOfView
@@ -98,6 +96,11 @@ function update() {
     , near
     , far
   )
+
+  geometry.dispose()
+  geometry.attr('aPosition', tcc.vertices)
+  geometry.faces(tcc.faces)
+
 }
 
 function render() {
@@ -129,4 +132,21 @@ function render() {
   // Finally: draws the bunny to the screen! The rest is
   // handled in our shaders.
   geometry.draw(gl.TRIANGLES)
+}
+
+function getT() {
+  let tEl = document.querySelector('#tEl')
+  return parseFloat(tEl.value)
+}
+
+function putT(t) {
+  let tEl = document.querySelector('#tEl')
+  tEl.value = t
+}
+
+function getTcc () {
+  var t = getT()
+  t = Math.max(0.0, Math.min(1.0, t))
+  putT(t)
+  return asTriads(modTcc.createTruncatedCube(t))
 }
