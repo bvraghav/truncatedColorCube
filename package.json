@@ -12,6 +12,7 @@
     "pages": "browserify index.js -o bundle.js"
   },
   "dependencies": {
+    "@jscad/modeling": "^2.12.0",
     "beefy": "^2.1.1",
     "browserify": "^6.2.0",
     "bunny": "^1.0.1",
