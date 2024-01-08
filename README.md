@@ -4,9 +4,21 @@ built over https://github.com/stackgl/bunny-walkthrough
 This repository creates a truncated cube with [this
 gist](https://gist.github.com/bvraghav/b897c168a67d08ad8f581009531afad2).
 
-
 And thus visualisation is a representation of the RGB
 color space.
+
+## Usage
+
+1. `git clone` using the URL/ command on the [github
+   web
+   page](https://github.com/bvraghav/truncatedColorCube).
+2. Descend into the working directory.
+3. Run the following on commandline.
+
+```sh
+npm install
+npm run start
+```
 
 ## The description from bunny-walkthrough
 
